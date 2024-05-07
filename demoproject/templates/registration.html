@@ -1,0 +1,39 @@
+{% load static %}
+
+
+			            <!-- Collect the nav links, forms, and other content for toggling -->
+			            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+			                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+			                    <li class=" scroll active"><a href="{{curl}} ">home</a></li>
+								<li class=" scroll active"><a href="{{curl}}/registration">Registration</a></li>
+			                    <li class="scroll"><a href="#works">how it works</a></li>
+			                    <li class="scroll"><a href="#explore">explore</a></li>
+			                    <li class="scroll"><a href="#reviews">review</a></li>
+			                    <li class="scroll"><a href="#blog">blog</a></li>
+			                    <li class="scroll"><a href="#contact">contact</a></li>
+			                </ul><!--/.nav -->
+			            </div><!-- /.navbar-collapse -->
+			        </div><!--/.container-->
+			    </nav><!--/nav-->
+			    <!-- End Navigation -->
+			</div><!--/.header-area-->
+		    <div class="clearfix"></div>
+
+		</section><!-- /.top-area-->
+		<!-- top-area End -->
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="subscription-input-group">
+            <form method="POST" >
+                {% csrf_token %}
+                <input type="text" name="name" class="subscription-input-form" placeholder="Enter your Name here">
+                <input type="email" name="email" class="subscription-input-form" placeholder="Enter your Email here">
+                <button class="appsLand-btn subscribe-btn" onclick="window.location.href='#'">
+                    summit
+                </button>
+            </form>
+        </div>
+    </div>	
+</div>
