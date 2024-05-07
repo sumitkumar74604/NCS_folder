@@ -36,11 +36,11 @@ jobs:
 
           echo "Deployment complete."
 
-      - name: Run Deployment
-        run: |
-          ssh -i ${{ secrets.demo_project.pem }} ec2-user@18.141.209.54 'bash -s' < deploy_script.sh
-        env:
-          ACTIONS_RUNNER_DEBUG: false
+      # - name: Run Deployment
+      #   run: |
+      #     ssh -i ${{ secrets.demo_project.pem }} ec2-user@18.141.209.54 'bash -s' < deploy_script.sh
+      #   env:
+      #     ACTIONS_RUNNER_DEBUG: false
 
       - name: Dry Run Deployment
         run: |
