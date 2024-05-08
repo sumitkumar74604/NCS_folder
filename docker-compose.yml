@@ -2,10 +2,10 @@ version: '3'
 
 services:
   django_app:
-    image: kumarsumit74604/djangoproject:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     volumes:
       - .:/app
-
-
