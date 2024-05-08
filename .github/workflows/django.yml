@@ -32,10 +32,10 @@ jobs:
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.54.251.141.38 }}
-          username: ${{ secrets.ec2-user }}
-          key: ${{ secrets.demo_project.pem }}
-          port: ${{ secrets.8000 }}  # Assuming this is the port for SSH connection
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          port: ${{ secrets.EC2_PORT }}
           script: |
             cd /home/ubuntu/actions-runner/_work/NCS_folder/NCS_folder
             #git pull origin master  # Pull the latest changes
