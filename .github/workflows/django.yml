@@ -29,18 +29,4 @@ jobs:
           source env/bin/activate
           pip install --upgrade -r requirements.txt
 
-      - name: Deploy to EC2
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_PRIVATE_KEY }}
-          port: ${{ secrets.EC2_PORT }}
-          script: |
-            cd /home/ubuntu/actions-runner/_work/NCS_folder/NCS_folder
-            #git pull origin master  # Pull the latest changes
-            #source venv/bin/activate  # Activate virtual environment
-            #python manage.py migrate  # Run migrations
-            python manage.py collectstatic --noinput  # Collect static files
-            sudo systemctl restart your-django-service  # Restart Django service
-            python manage.py runserver 0.0.0.0:8000
+    
