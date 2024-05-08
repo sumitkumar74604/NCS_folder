@@ -82,8 +82,8 @@ jobs:
           key: ${{ secrets.demo_project.pem }}
           port: ${{ secrets.8000 }}  # Assuming this is the port for SSH connection
           script: |
-            cd /path/to/your/django/app
-            git pull origin master  # Pull the latest changes
+            cd /home/ubuntu/actions-runner/_work/NCS_folder/NCS_folder
+            #git pull origin master  # Pull the latest changes
             source venv/bin/activate  # Activate virtual environment
             #python manage.py migrate  # Run migrations
             python manage.py collectstatic --noinput  # Collect static files
