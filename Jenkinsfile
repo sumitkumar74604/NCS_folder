@@ -9,9 +9,13 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                sh '''#!bin/bash
-                    sudo docker-compose down
-                    sudo docker-compose up -d'''
+                script {
+                    // Ensure docker-compose commands are executed without sudo if possible
+                    sh '''
+                    docker-compose down
+                    docker-compose up -d
+                    '''
+                }
             }
         }
     }
