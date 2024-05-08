@@ -1,48 +1,3 @@
-# name: Django CI
-
-# on:
-#   push:
-#     branches: [ "master" ]
-#   # pull_request:
-#   #   branches: [ "master" ]
-
-# jobs:
-#   build:
-
-#     runs-on: ubuntu-latest
-#     strategy:
-#       #max-parallel: 4
-#        matrix:
-#          python-version: [3.x]
-
-#     steps:
-#     - uses: actions/checkout@v4
-#     - name: Set up Python ${{ matrix.python-version }}
-#       uses: actions/setup-python@v3
-#       with:
-#         python-version: ${{ matrix.python-version }}
-#     - name: Install Dependencies
-#       run: |
-#         python3 -m venv ./env
-#         source env/bin/activate
-#         pip install --upgrade -r requirements.txt
-
-
-#  - name: Deploy to EC2
-#       uses: appleboy/ssh-action@master
-#       with:
-#         host: ${{ secrets.EC2_HOST }}
-#         username: ${{ secrets.EC2_USERNAME }}
-#         key: ${{ secrets.EC2_PRIVATE_KEY }}
-#         port: ${{ secrets.EC2_PORT }}
-#         script: |
-#           cd /path/to/your/django/app
-#           git pull origin master  # Pull the latest changes
-#           source venv/bin/activate  # Activate virtual environment
-#           python manage.py migrate  # Run migrations
-#           python manage.py collectstatic --noinput  # Collect static files
-#           sudo systemctl restart your-django-service  # Restart Django service
-        
 name: Django CI/CD
 
 on:
@@ -84,7 +39,7 @@ jobs:
           script: |
             cd /home/ubuntu/actions-runner/_work/NCS_folder/NCS_folder
             #git pull origin master  # Pull the latest changes
-            source venv/bin/activate  # Activate virtual environment
+            #source venv/bin/activate  # Activate virtual environment
             #python manage.py migrate  # Run migrations
             python manage.py collectstatic --noinput  # Collect static files
             sudo systemctl restart your-django-service  # Restart Django service
