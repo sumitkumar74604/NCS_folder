@@ -1,5 +1,5 @@
 asgiref
-backports.zoneinfo
+#backports.zoneinfo
 Django
 sqlparse
 typing-extensions
