@@ -1,0 +1,38 @@
+# python 3.8 
+
+import boto3
+from uuid import uuid4
+
+def lambda_handler(event, context):
+    # Initialize boto3 clients and resources
+    s3 = boto3.client("s3")
+    dynamodb = boto3.resource('dynamodb')
+    
+    # Retrieve DynamoDB table
+    dynamoTable = dynamodb.Table('LambdaFunctionTriggerDatabaseTable')
+    
+    # Process each record in the event
+    for record in event['Records']:
+        # Extract information from the S3 event record
+        bucket_name = record['s3']['bucket']['name']
+        object_key = record['s3']['object']['key']
+        size = record['s3']['object'].get('size', -1)
+        event_name = record['eventName']
+        event_time = record['eventTime']
+        
+        # Generate a unique identifier for the item
+        unique_id = str(uuid4())
+        
+        # Put item into DynamoDB table
+        dynamoTable.put_item(
+            Item={
+                'unique': unique_id,
+                'Bucket': bucket_name,
+                'Object': object_key,
+                'Size': size,
+                'Event': event_name,
+                'EventTime': event_time
+            }
+        )
+
+# Just copy and paste this code into your Lambda function, and it should work with the corrected values for the S3 bucket name and DynamoDB table name.
