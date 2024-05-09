@@ -3,3 +3,4 @@ backports.zoneinfo
 Django
 sqlparse
 typing-extensions
+gunicorn
