@@ -41,19 +41,27 @@ def lambda_handler(event, context):
 # python 3.9
 import boto3
 import time
+from uuid import uuid4
 
 region = 'ap-southeast-1'
 instances = ['i-047d64a597e5ff39c']
 ec2 = boto3.client('ec2', region_name=region)
 
 def lambda_handler(event, context):
-    # Stop instances
-    ec2.stop_instances(InstanceIds=instances)
-    print('Stopping your instances: ' + str(instances))
-    
-    # Delay for 2 minutes (120 seconds)
-    time.sleep(120)
-    
-    # Start instances after the delay
+    while True:
+        # Start instances
+        start_instances()
+        print('Starting your instances:', instances)
+        
+        # Delay for 60 seconds
+        time.sleep(60)
+        
+        # Stop instances
+        stop_instances()
+        print('Stopping your instances:', instances)
+
+def start_instances():
     ec2.start_instances(InstanceIds=instances)
-    print('Starting your instances: ' + str(instances))
+
+def stop_instances():
+    ec2.stop_instances(InstanceIds=instances)
