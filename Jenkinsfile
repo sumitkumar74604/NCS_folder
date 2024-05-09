@@ -8,13 +8,13 @@ pipeline {
         
         stage("code"){
             steps{
-                git url: "https://github.com/gehlotdeep/Github_Actions_ncs.git", branch: "main"
+                git url: "https://github.com/gehlotdeep/Github_Actions_ncs.git"
                 echo 'Code Cloning'
             }
         }
-        stage("build and test"){
+        stage("build"){
             steps{
-                sh "docker build -t ncs-image ."
+                sh "docker build -t django-image ."
                 echo 'code builded'
             }
         }
@@ -23,12 +23,12 @@ pipeline {
                 echo 'image scanning'
             }
         }
-        stage("push"){
+        stage("push image DockerHub"){
             steps{
                 withCredentials([usernamePassword(credentialsId:"dockerhub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
                 sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                sh "docker tag ncs-image:latest ${env.dockerHubUser}/ncs-image:latest"
-                sh "docker push ${env.dockerHubUser}/ncs-image:latest"
+                sh "docker tag django-image:latest ${env.dockerHubUser}/django-image:latest"
+                sh "docker push ${env.dockerHubUser}/django-image:latest"
                 echo 'image pushed'
                 }
             }
