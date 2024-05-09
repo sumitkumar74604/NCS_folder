@@ -9,3 +9,12 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
+
+
+# version: '3'
+
+# services:
+#   web:
+#     image: kumarsumit74604/djangoproject:latest
+#     ports:
+#       - "9000:9000"

@@ -7,26 +7,87 @@ on:
   #   branches: [master]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      # max-parallel: 4
-      matrix:
-        python-version: [3.x]
+    build:
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          python-version: [3.x]
+  
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+  
+        - name: Set up Python ${{ matrix.python-version }}
+          uses: actions/setup-python@v3
+          with:
+            python-version: ${{ matrix.python-version }}
+  
+        - name: Install Dependencies
+          run: |
+            python3 -m venv ./env
+            source env/bin/activate
+            pip install --upgrade -r requirements.txt
+  
+    deploy:
+      runs-on: ubuntu-latest
+  
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v1
+  
+        - name: Configure AWS Credentials
+          uses: aws-actions/configure-aws-credentials@v1
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: us-east-1
+  
+        - name: Deploy static site to S3 bucket
+          run: aws s3 sync . s3://tws-portfolio --delete
+          
+# name: Django CI/CD
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+# on:
+#   push:
+#     branches: [master]
+#   # pull_request:
+#   #   branches: [master]
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v3
-        with:
-          python-version: ${{ matrix.python-version }}
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         python-version: [3.x]
 
-      - name: Install Dependencies
-        run: |
-          python3 -m venv ./env
-          source env/bin/activate
-          pip install --upgrade -r requirements.txt
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-    
+#       - name: Set up Python ${{ matrix.python-version }}
+#         uses: actions/setup-python@v3
+#         with:
+#           python-version: ${{ matrix.python-version }}
+
+#       - name: Install Dependencies
+#         run: |
+#           python3 -m venv ./env
+#           source env/bin/activate
+#           pip install --upgrade -r requirements.txt
+
+#   deploy:
+#     needs: build
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       # Add deployment steps here
+#       - name: Deploy to Production
+#         run: |
+#           # Example deployment command, replace with your actual deployment script or commands
+#           echo "Deploying to production..."
+#           # Your deployment commands here
+
+
