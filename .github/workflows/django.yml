@@ -61,7 +61,6 @@ jobs:
         run: |
           
           cd /home/ubuntu/actions-runner/_work/NCS_folder/NCS_folder
-          nohup python manage.py runserver 0.0.0.0:8000 &
+          python manage.py runserver 0.0.0.0:8000 &
 
 
-          
