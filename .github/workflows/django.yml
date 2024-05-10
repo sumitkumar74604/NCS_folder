@@ -32,16 +32,21 @@ jobs:
     runs-on: self-hosted
 
     steps:
+      - name: Check and kill port 8000 if running
+        run: |
+          if lsof -Pi :8000 -sTCP:LISTEN -t >/dev/null ; then
+            echo "Port 8000 is already in use. Killing the process..."
+            kill $(lsof -t -i:8000)
+            echo "Process killed successfully."
+          else
+            echo "Port 8000 is not in use."
+          fi
+        shell: bash
+
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install AWS CLI on EC2
-        run: |
-          # sudo apt-get update
-          # sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          # unzip awscliv2.zip
-          # sudo ./aws/install
-          # #sudo apt-get install -y awscli
+
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -54,8 +59,9 @@ jobs:
 
       - name: Deploy Django project
         run: |
-          kill 8000
+          
           cd /home/ubuntu/actions-runner/_work/NCS_folder/NCS_folder
           nohup python manage.py runserver 0.0.0.0:8000 &
 
 
+          
