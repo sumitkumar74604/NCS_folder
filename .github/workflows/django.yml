@@ -57,50 +57,5 @@ jobs:
           cd /home/ubuntu/actions-runner/_work/NCS_folder/NCS_folder
           python manage.py runserver 0.0.0.0:8000 &
 
+
           
-# name: Django CI/CD
-
-# on:
-#   push:
-#     branches: [master]
-#   # pull_request:
-#   #   branches: [master]
-
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     strategy:
-#       matrix:
-#         python-version: [3.x]
-
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
-
-#       - name: Set up Python ${{ matrix.python-version }}
-#         uses: actions/setup-python@v3
-#         with:
-#           python-version: ${{ matrix.python-version }}
-
-#       - name: Install Dependencies
-#         run: |
-#           python3 -m venv ./env
-#           source env/bin/activate
-#           pip install --upgrade -r requirements.txt
-
-#   deploy:
-#     needs: build
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
-
-#       # Add deployment steps here
-#       - name: Deploy to Production
-#         run: |
-#           # Example deployment command, replace with your actual deployment script or commands
-#           echo "Deploying to production..."
-#           # Your deployment commands here
-
-
