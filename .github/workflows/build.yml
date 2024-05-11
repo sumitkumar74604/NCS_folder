@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-   
+    needs: ["specify_version"]
     strategy:
       matrix:
         python-version: '${{fromJson(needs.specify_version.outputs.python-version)}}'
@@ -43,4 +43,3 @@ jobs:
       - name: Check YAML syntax
         run: echo "Checking syntax"
 
-        
