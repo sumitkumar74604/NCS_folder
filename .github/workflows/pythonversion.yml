@@ -1,4 +1,4 @@
-name: SpecifyPythonVersion
+name: Version Specify
 
 on:
   workflow_dispatch:
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       python-version: ${{ steps.set_up_python.outputs.python-version }}
-
+      
     steps:
       - name: Set up Python
         id: set_up_python
