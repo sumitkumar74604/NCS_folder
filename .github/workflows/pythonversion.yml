@@ -1,4 +1,4 @@
-name: Specify Python Version
+name: Specify_Python_Version
 
 on:
   workflow_dispatch:
@@ -19,14 +19,4 @@ jobs:
         id: set_up_python
         uses: actions/setup-python@v3
         with:
-          python-version: ${{ github.event.inputs.python-version }}
-
-
-
-
-
-
-
-
-
-          
+          python-version: '${{ github.event.inputs.python-version }}'  # Ensure this is formatted as a string
