@@ -15,8 +15,8 @@ jobs:
       python-version: ${{ steps.set_up_python.outputs.python-version }}
 
     steps:
-      - name: Set up Python ${{ github.event.inputs.python-version }}
+      - name: Set up Python
         id: set_up_python
         uses: actions/setup-python@v3
         with:
-          python-version: '${{ github.event.inputs.python-version }}'  # Ensure this is formatted as a string
+          python-version: '${{ github.event.inputs.python-version }}'
