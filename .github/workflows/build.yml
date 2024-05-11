@@ -12,10 +12,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    needs: specify_python_version
+    needs: specify_version # Corrected job name here
     strategy:
       matrix:
-        python-version: '${{fromJson(needs.specify_python_version.outputs.python-version)}}'
+        python-version: '${{fromJson(needs.specify_version.outputs.python-version)}}'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -37,7 +37,7 @@ jobs:
 
 
 
-          # Add a standalone job without any dependencies
+  # Add a standalone job without any dependencies
   check_syntax:
     runs-on: ubuntu-latest
     steps:
