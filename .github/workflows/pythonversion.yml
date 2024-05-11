@@ -1,4 +1,4 @@
-name: Specify_Python_Version
+name: SpecifyPythonVersion
 
 on:
   workflow_dispatch:
