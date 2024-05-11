@@ -12,7 +12,7 @@ jobs:
     needs: specify_python_version
     strategy:
       matrix:
-        python-version: '${{fromJson(needs.specify_python_version.outputs.python-version)}}'  # Ensure the version is treated as a string
+        python-version: '${{fromJson(needs.specify_python_version.outputs.python-version)}}'  # Use output from specify_python_version job
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
