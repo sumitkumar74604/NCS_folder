@@ -35,10 +35,5 @@ jobs:
           python manage.py runserver 0.0.0.0:8000 &
 
 
- # Add a standalone job without any dependencies
- check_syntax:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check YAML syntax
-        run: echo "Checking syntax"
+
 
