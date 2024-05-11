@@ -4,6 +4,7 @@ name: Build Code
 
 
 
+
 on:
   workflow_run:
     workflows: ["Specify Python Version"]
@@ -27,7 +28,7 @@ jobs:
     needs: specify_python_version
     strategy:
       matrix:
-        python-version: ${{fromJson(needs.specify_python_version.outputs.python-version)}}
+        python-version: ${{fromJson(needs.specify_python_version.outputs.python-version)}}  # Use output from specify_python_version job
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -48,4 +49,3 @@ jobs:
 
 
 
-          
