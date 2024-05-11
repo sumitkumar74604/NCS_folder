@@ -6,7 +6,7 @@ on:
       python-version:
         description: 'Python version to use (e.g., 3.6, 3.7, 3.8)'
         required: true
-        default: '3.8'
+        default: '2.8'
 
 jobs:
   specify_version:

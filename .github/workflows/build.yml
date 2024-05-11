@@ -1,4 +1,4 @@
-name: Django CI/CD
+name: Build Code
 
 on:
   push:
@@ -8,9 +8,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    needs: specify_version
     strategy:
       matrix:
-        python-version: [3.x]
+        python-version: ${{fromJson(needs.specify_version.outputs.python-version)}}
 
     steps:
       - name: Checkout code
@@ -26,41 +27,5 @@ jobs:
           python3 -m venv ./env
           source env/bin/activate
           pip install --upgrade -r requirements.txt
-
-  deploy:
-    needs: build
-    runs-on: self-hosted  
-
-    steps:
-      - name: Check and kill port 8000 if running
-        run: |
-          if lsof -Pi :8000 -sTCP:LISTEN -t >/dev/null ; then
-            echo "Port 8000 is already in use. Killing the process..."
-            kill $(lsof -t -i:8000)
-            echo "Process killed successfully."
-          else
-            echo "Port 8000 is not in use."
-          fi
-        shell: bash
-
-      # - name: Checkout code
-      #   uses: actions/checkout@v2
-
-
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
-          aws-region: ap-southeast-1
-          audience: sts.amazonaws.com
-
-
-      - name: Deploy Django project
-        run: |
-
-          cd /home/ubuntu/actions-runner/_work/NCS_folder/NCS_folder
-          python manage.py runserver 0.0.0.0:8000 &
 
 
