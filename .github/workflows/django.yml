@@ -29,7 +29,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest 
+    runs-on: self-hosted  
 
     steps:
       - name: Check and kill port 8000 if running
@@ -43,8 +43,8 @@ jobs:
           fi
         shell: bash
 
-      - name: Checkout code
-        uses: actions/checkout@v2
+      # - name: Checkout code
+      #   uses: actions/checkout@v2
 
 
 
@@ -59,7 +59,7 @@ jobs:
 
       - name: Deploy Django project
         run: |
-          
+
           cd /home/ubuntu/actions-runner/_work/NCS_folder/NCS_folder
           python manage.py runserver 0.0.0.0:8000 &
 
