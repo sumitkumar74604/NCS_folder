@@ -7,7 +7,7 @@ name: Build Code
 
 on:
   workflow_run:
-    workflows: ["Specify Python Version"]
+    workflows: ["Specify_Python_Version"]
     types:
       - completed
 
